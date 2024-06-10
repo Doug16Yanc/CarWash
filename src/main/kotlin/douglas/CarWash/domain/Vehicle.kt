@@ -7,15 +7,15 @@ import org.springframework.data.mongodb.core.mapping.Document
 @Document(collection = "vehicles")
 data class Vehicle (
     @Id
-    private val id : Long? = null,
+    val id : Long? = null,
 
-    private val brand : String? = null,
+    var brand : String? = null,
 
-    private val model : String? = null,
+    var model : String? = null,
 
-    private val color : String? = null,
+    var color : String? = null,
 
-    private val plate : String? = null,
+    var plate : String? = null,
 
-    private val type : VehicleType? = null
+    val type : VehicleType? = null
 )

@@ -7,6 +7,5 @@ data class Address (
     var street : String? = null,
     var number : Int? = null,
     var neighborhood : String? = null,
-    var city : String? = null,
-    var zipCode : String? = null
+    var city : String? = null
 )
