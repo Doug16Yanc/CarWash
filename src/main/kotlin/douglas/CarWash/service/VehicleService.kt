@@ -1,13 +1,14 @@
 package douglas.CarWash.service
 
 import douglas.CarWash.domain.Vehicle
+import douglas.CarWash.dto.VehicleDTO
 import douglas.CarWash.repository.VehicleRepository
 import java.util.*
 
 class VehicleService (private var vehicleRepository: VehicleRepository) {
 
-    fun saveVehicle(vehicle: Vehicle): Vehicle {
-        return vehicleRepository.save(vehicle)
+    fun saveVehicle(vehicleDTO: VehicleDTO): Vehicle {
+        return vehicleRepository.save(vehicleDTO.doVehicle())
     }
 
     fun findById(id : Long) : Optional<Vehicle> {

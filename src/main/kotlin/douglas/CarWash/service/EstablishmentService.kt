@@ -1,6 +1,7 @@
 package douglas.CarWash.service
 
 import douglas.CarWash.domain.Establishment
+import douglas.CarWash.dto.EstablishmentDTO
 import douglas.CarWash.repository.EstablishmentRepository
 import org.springframework.stereotype.Service
 import java.util.*
@@ -9,8 +10,8 @@ import javax.swing.plaf.synth.Region
 @Service
 class EstablishmentService (private var establishmentRepository: EstablishmentRepository) {
 
-    fun createEstablishment(establishment: Establishment): Establishment {
-        return establishmentRepository.save(establishment)
+    fun createEstablishment(establishmentDTO: EstablishmentDTO): Establishment {
+        return establishmentRepository.save(establishmentDTO.doEstablishment())
     }
 
     fun findById(id : Long) : Optional<Establishment> {
