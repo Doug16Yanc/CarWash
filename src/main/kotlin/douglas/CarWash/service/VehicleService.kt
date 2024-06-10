@@ -19,8 +19,8 @@ class VehicleService (private var vehicleRepository: VehicleRepository) {
         return vehicleRepository.findAll()
     }
 
-    fun delete(id : Long) {
-        vehicleRepository.deleteById(id)
+    fun delete(vehicle : Vehicle) {
+        vehicleRepository.delete(vehicle)
     }
 
     fun update(vehicle: Vehicle) : Vehicle {

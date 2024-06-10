@@ -5,7 +5,6 @@ import douglas.CarWash.dto.EstablishmentDTO
 import douglas.CarWash.repository.EstablishmentRepository
 import org.springframework.stereotype.Service
 import java.util.*
-import javax.swing.plaf.synth.Region
 
 @Service
 class EstablishmentService (private var establishmentRepository: EstablishmentRepository) {
@@ -22,8 +21,8 @@ class EstablishmentService (private var establishmentRepository: EstablishmentRe
         return establishmentRepository.findAll()
     }
 
-    fun delete(id : Long) {
-        establishmentRepository.deleteById(id)
+    fun delete(establishment : Establishment) {
+        establishmentRepository.delete(establishment)
     }
 
     fun update(establishment: Establishment): Establishment {
