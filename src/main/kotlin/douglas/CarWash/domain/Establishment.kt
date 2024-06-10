@@ -14,6 +14,8 @@ data class Establishment (
 
     var telephone : String? = null,
 
-    var vehicleNumber : Int? = null
+    var vehicleNumber : Int? = null,
+
+    var vehicle: MutableList<Vehicle>? = null
 
 )
