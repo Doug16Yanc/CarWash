@@ -3,17 +3,19 @@ package douglas.CarWash.domain
 import douglas.CarWash.enumeration.VehicleStatus
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.Document
+import javax.annotation.processing.Generated
 
 @Document(collection = "establishments")
 class Establishment(
-    @Id var id: Long?,
+    @Id
+    var id: String,
     var name: String?,
     var address: Address?,
     var telephone: String?,
     var vehicleNumber: Int?,
     private var vehicle: MutableList<Vehicle>?,
-    private var vehiclesEntered: Int?,
-    private var vehiclesExited: Int?
+    var vehiclesEntered: Int?,
+    var vehiclesExited: Int?
 ) {
 
     private fun calculateProhibited(): Int {

@@ -6,6 +6,7 @@ import douglas.CarWash.service.VehicleService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
+import kotlin.random.Random
 
 @RestController
 class VehicleController (var vehicleService: VehicleService) {
@@ -15,11 +16,17 @@ class VehicleController (var vehicleService: VehicleService) {
 
         val vehicle = vehicleService.saveVehicle(vehicleDTO)
 
+        var id = ""
+        do {
+            id = Random.nextInt(1, 11).toString() + Random(10 - id.length)
+
+        } while (vehicleService.existsById(id))
+
         return ResponseEntity.ok(vehicle)
     }
 
     @GetMapping("/vehicles/{id}")
-    fun findVehicleById(@PathVariable("id") id : Long) : ResponseEntity<Vehicle> {
+    fun findVehicleById(@PathVariable("id") id : String) : ResponseEntity<Vehicle> {
 
         val vehicleFound = vehicleService.findById(id)
 
@@ -62,7 +69,7 @@ class VehicleController (var vehicleService: VehicleService) {
     }
 
     @PutMapping("/vehicles/{id}")
-    fun updateVehicle(@PathVariable("id") id : Long, @RequestBody vehicleDTO: VehicleDTO) : ResponseEntity<Vehicle> {
+    fun updateVehicle(@PathVariable("id") id : String, @RequestBody vehicleDTO: VehicleDTO) : ResponseEntity<Vehicle> {
         val vehicleFound = vehicleService.findById(id)
 
         if (vehicleFound.isPresent) {
@@ -81,7 +88,7 @@ class VehicleController (var vehicleService: VehicleService) {
 
     @DeleteMapping("/vehicles/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    fun deleteVehicleById(@PathVariable id : Long) : ResponseEntity<String> {
+    fun deleteVehicleById(@PathVariable id : String) : ResponseEntity<String> {
 
         val vehicleFound = vehicleService.findById(id)
 

@@ -5,7 +5,7 @@ import douglas.CarWash.enumeration.VehicleStatus
 import douglas.CarWash.enumeration.VehicleType
 
 data class VehicleDTO (
-    var id : Long,
+    var id : String,
     var brand : String,
     var model : String,
     var color : String,
@@ -15,15 +15,16 @@ data class VehicleDTO (
 ) {
     fun doVehicle() : Vehicle {
         return Vehicle(
-            id,
-            brand,
-            model,
-            color,
-            plate,
-            type,
-            status
+                id,
+                brand,
+                model,
+                color,
+                plate,
+                type,
+                status
         )
     }
 }
+
 
 

@@ -4,7 +4,7 @@ import douglas.CarWash.domain.Address
 import douglas.CarWash.domain.Establishment
 
 data class EstablishmentDTO (
-    var id : Long,
+    var id : String?,
     var name : String,
     var address: Address,
     var telephone : String,
@@ -12,21 +12,23 @@ data class EstablishmentDTO (
     var vehiclesEntered : Int,
     var vehiclesExited : Int
 ) {
-    fun doEstablishment () : Establishment {
-        return Establishment(
-            id,
-            name,
-            Address(
-                address.street,
-                address.number,
-                address.neighborhood,
-                address.city
-            ),
-            telephone,
-            vehicleNumber,
-            null,
-            vehiclesEntered,
-            vehiclesExited
-        )
+    fun doEstablishment () : Establishment? {
+        return id?.let {
+            Establishment(
+                it,
+                name,
+                Address(
+                    address.street,
+                    address.number,
+                    address.neighborhood,
+                    address.city
+                ),
+                telephone,
+                vehicleNumber,
+                null,
+                vehiclesEntered,
+                vehiclesExited
+            )
+        }
     }
 }

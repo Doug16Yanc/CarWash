@@ -9,11 +9,11 @@ import java.util.*
 @Service
 class EstablishmentService (private var establishmentRepository: EstablishmentRepository) {
 
-    fun createEstablishment(establishmentDTO: EstablishmentDTO): Establishment {
-        return establishmentRepository.save(establishmentDTO.doEstablishment())
+    fun createEstablishment(establishmentDTO: EstablishmentDTO): Establishment? {
+        return establishmentDTO.doEstablishment()?.let { establishmentRepository.save(it) }
     }
 
-    fun findById(id : Long) : Optional<Establishment> {
+    fun findById(id : String) : Optional<Establishment> {
         return establishmentRepository.findById(id)
     }
 
@@ -48,5 +48,9 @@ class EstablishmentService (private var establishmentRepository: EstablishmentRe
         else {
             throw RuntimeException("Establishment not found.")
         }
+    }
+
+    fun existsById(id : String): Boolean {
+        return establishmentRepository.existsById(id)
     }
 }

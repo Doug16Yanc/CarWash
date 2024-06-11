@@ -5,15 +5,9 @@ import douglas.CarWash.dto.EstablishmentDTO
 import douglas.CarWash.service.EstablishmentService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.DeleteMapping
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.PutMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.ResponseStatus
-import org.springframework.web.bind.annotation.RestController
-import kotlin.collections.ArrayList
+import org.springframework.web.bind.annotation.*
+import kotlin.random.Random
+
 
 @RestController
 class EstablishmentController (var establishmentService: EstablishmentService) {
@@ -23,11 +17,15 @@ class EstablishmentController (var establishmentService: EstablishmentService) {
 
         val establishment = establishmentService.createEstablishment(establishmentDTO)
 
+        var id: String = ""
+        do {
+            id = Random.nextInt(5, 11).toString() + Random(10 - id.length)
+        } while (establishmentService.existsById(id))
         return ResponseEntity.ok(establishment)
     }
 
     @GetMapping("/establishments/{id}")
-    fun findEstablishmentById(@PathVariable("id") id : Long) : ResponseEntity<Establishment> {
+    fun findEstablishmentById(@PathVariable("id") id : String) : ResponseEntity<Establishment> {
 
         val establishmentFound = establishmentService.findById(id)
 
@@ -51,10 +49,15 @@ class EstablishmentController (var establishmentService: EstablishmentService) {
                         establisment.name?.let { it2 ->
                             establisment.telephone?.let { it3 ->
                                 establisment.vehicleNumber?.let { it4 ->
-                                    EstablishmentDTO(
-                                        it, it2,
-                                        it1, it3, it4
-                                    )
+                                    establisment.vehiclesEntered?.let { it5 ->
+                                        establisment.vehiclesExited?.let { it6 ->
+                                            EstablishmentDTO(
+                                                it, it2,
+                                                it1, it3, it4,
+                                                it5, it6
+                                            )
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -66,8 +69,8 @@ class EstablishmentController (var establishmentService: EstablishmentService) {
 
     }
 
-    @PutMapping("/establisments/{id}")
-    fun updateEstablishment(@PathVariable("id") id : Long, @RequestBody establishmentDTO: EstablishmentDTO) : ResponseEntity<Establishment> {
+    @PutMapping("/establishments/{id}")
+    fun updateEstablishment(@PathVariable("id") id : String, @RequestBody establishmentDTO: EstablishmentDTO) : ResponseEntity<Establishment> {
         val establishmentFound = establishmentService.findById(id)
 
         if (establishmentFound.isPresent) {
@@ -92,9 +95,9 @@ class EstablishmentController (var establishmentService: EstablishmentService) {
         }
     }
 
-    @DeleteMapping("/establisments/{id}")
+    @DeleteMapping("/establishments/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    fun deleteEstablishmentById(@PathVariable id : Long) : ResponseEntity<String> {
+    fun deleteEstablishmentById(@PathVariable id : String) : ResponseEntity<String> {
 
         val establishmentFound = establishmentService.findById(id)
 
