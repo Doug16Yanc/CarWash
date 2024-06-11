@@ -28,10 +28,9 @@ class VehicleService (private var vehicleRepository: VehicleRepository) {
 
         if (vehicleFound?.isPresent == true) {
             val existingVehicle = vehicleFound.get()
-            existingVehicle.brand = vehicle.brand
-            existingVehicle.model = vehicle.model
             existingVehicle.color = vehicle.color
             existingVehicle.plate = vehicle.plate
+            existingVehicle.status = vehicle.status
 
             return vehicleRepository.save(existingVehicle)
         }

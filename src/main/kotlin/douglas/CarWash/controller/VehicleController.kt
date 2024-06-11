@@ -43,9 +43,12 @@ class VehicleController (var vehicleService: VehicleService) {
                         vehicle.color?.let { it3 ->
                             vehicle.plate?.let { it4 ->
                                 vehicle.type?.let { it5 ->
-                                    VehicleDTO(it,
-                                        it1, it2, it3, it4, it5
-                                    )
+                                    vehicle.status?.let { it6 ->
+                                        VehicleDTO(
+                                            it,
+                                            it1, it2, it3, it4, it5, it6
+                                        )
+                                    }
                                 }
                             }
                         }
@@ -66,6 +69,7 @@ class VehicleController (var vehicleService: VehicleService) {
             val vehicle = vehicleFound.get()
             vehicle.color = vehicleDTO.color
             vehicle.plate = vehicleDTO.plate
+            vehicle.status = vehicle.status
 
             val updatedVehicle = vehicleService.update(vehicle)
             return ResponseEntity.ok(updatedVehicle)

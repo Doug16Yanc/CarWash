@@ -1,6 +1,7 @@
 package douglas.CarWash.dto
 
 import douglas.CarWash.domain.Vehicle
+import douglas.CarWash.enumeration.VehicleStatus
 import douglas.CarWash.enumeration.VehicleType
 
 data class VehicleDTO (
@@ -9,7 +10,8 @@ data class VehicleDTO (
     var model : String,
     var color : String,
     var plate : String,
-    var type : VehicleType
+    var type : VehicleType,
+    var status : VehicleStatus
 ) {
     fun doVehicle() : Vehicle {
         return Vehicle(
@@ -18,7 +20,8 @@ data class VehicleDTO (
             model,
             color,
             plate,
-            type
+            type,
+            status
         )
     }
 }

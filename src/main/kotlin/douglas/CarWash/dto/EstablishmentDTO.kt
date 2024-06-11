@@ -2,14 +2,15 @@ package douglas.CarWash.dto
 
 import douglas.CarWash.domain.Address
 import douglas.CarWash.domain.Establishment
-import org.springframework.data.mongodb.core.aggregation.ArithmeticOperators.Add
 
 data class EstablishmentDTO (
     var id : Long,
     var name : String,
     var address: Address,
     var telephone : String,
-    var vehicleNumber : Int
+    var vehicleNumber : Int,
+    var vehiclesEntered : Int,
+    var vehiclesExited : Int
 ) {
     fun doEstablishment () : Establishment {
         return Establishment(
@@ -22,7 +23,10 @@ data class EstablishmentDTO (
                 address.city
             ),
             telephone,
-            vehicleNumber
+            vehicleNumber,
+            null,
+            vehiclesEntered,
+            vehiclesExited
         )
     }
 }
